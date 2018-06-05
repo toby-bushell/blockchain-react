@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transaction Component renders correctly 1`] = `
+<div>
+  <h1>
+    Transaction Send
+  </h1>
+  <form
+    onSubmit={[Function]}
+  >
+    <label
+      className="label-hidden"
+      htmlFor="amount"
+    >
+      Address to send to
+    </label>
+    <input
+      name="toAddress"
+      onChange={[Function]}
+      placeholder="to address"
+      type="text"
+      value=""
+    />
+    <label
+      className="label-hidden"
+      htmlFor="amount"
+    >
+      Amount to send
+    </label>
+    <input
+      name="amount"
+      onChange={[Function]}
+      placeholder="amount"
+      type="number"
+      value=""
+    />
+    <input
+      className="sc-ifAKCX kMYCEa"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+`;

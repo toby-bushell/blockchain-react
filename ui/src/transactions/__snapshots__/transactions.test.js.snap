@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="sc-bwzfXH CzfMt"
+  >
+    <h3>
+      Received
+    </h3>
+    <table
+      className="sc-bdVaJa hQLGxP"
+    >
+      <thead>
+        <tr>
+          <th>
+            To Address
+          </th>
+          <th>
+            From Address
+          </th>
+          <th>
+            Amount (tbc)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            XIbniDmR0IBL4ohswo2S
+          </td>
+          <td>
+            (mining reward)
+          </td>
+          <td>
+            100
+          </td>
+        </tr>
+        <tr>
+          <td>
+            XIbniDmR0IBL4ohswo2S
+          </td>
+          <td>
+            (mining reward)
+          </td>
+          <td>
+            100
+          </td>
+        </tr>
+        <tr>
+          <td>
+            XIbniDmR0IBL4ohswo2S
+          </td>
+          <td>
+            (mining reward)
+          </td>
+          <td>
+            100
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    className="sc-bwzfXH CzfMt"
+  >
+    <h3>
+      Sent
+    </h3>
+    <table
+      className="sc-bdVaJa hQLGxP"
+    >
+      <thead>
+        <tr>
+          <th>
+            To Address
+          </th>
+          <th>
+            From Address
+          </th>
+          <th>
+            Amount (tbc)
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            21421421
+          </td>
+          <td>
+            XIbniDmR0IBL4ohswo2S
+          </td>
+          <td>
+            10
+          </td>
+        </tr>
+        <tr>
+          <td>
+            tobbyyy
+          </td>
+          <td>
+            XIbniDmR0IBL4ohswo2S
+          </td>
+          <td>
+            200
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

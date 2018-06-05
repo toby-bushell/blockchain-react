@@ -1,0 +1,36 @@
+{
+  "data": "Transaction created",
+  "status": 200,
+  "statusText": "OK",
+  "headers": {
+    "strict-transport-security": "max-age=15552000; includeSubDomains",
+    "x-content-type-options": "nosniff",
+    "x-powered-by": "Express",
+    "x-download-options": "noopen",
+    "x-frame-options": "SAMEORIGIN",
+    "content-type": "application/json; charset=utf-8",
+    "date": "Thu, 31 May 2018 13:28:19 GMT",
+    "etag": "W/\"15-otzYp40UvCDoGWJvaeN27DQwqVw\"",
+    "connection": "close",
+    "x-dns-prefetch-control": "off",
+    "vary": "Accept-Encoding",
+    "content-length": "21",
+    "x-xss-protection": "1; mode=block"
+  },
+  "config": {
+    "transformRequest": {},
+    "transformResponse": {},
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json;charset=utf-8"
+    },
+    "method": "post",
+    "url": "/api/transaction",
+    "data": "{\"fromAddress\":\"XIbniDmR0IBL4ohswo2S\",\"toAddress\":\"asfas\",\"amount\":\"10\"}"
+  },
+  "request": {}
+}
