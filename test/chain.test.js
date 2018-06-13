@@ -3,42 +3,75 @@ const chain = require('../Classes/Chain');
 let testCoin = [];
 
 beforeEach(() => {
-	let initializeBlockChain = function () {
-		testCoin = new chain(block);
-		//set thing low for tests
-		testCoin.difficulty = 1;
-		testCoin.addBlock(new block(1, "9/01/2018", {amount: 5}));
-		testCoin.addBlock(new block(2, "10/03/2018", {amount: 500}));
-		testCoin.addBlock(new block(3, "10/05/2018", {amount: 5000}));
-	};
-	return initializeBlockChain();
+  let initializeBlockChain = () => {
+    testCoin = new chain();
+    //set thing low for tests
+    testCoin.difficulty = 1;
+
+    testCoin.createTransaction('address1', 'address2', 200);
+    testCoin.createTransaction('address3', 'address1', 500);
+    testCoin.minePendingTransactions('rewardAddress');
+  };
+  return initializeBlockChain();
 });
 
 afterEach(() => {
-	testCoin = [];
+  testCoin = [];
 });
 
 test('chain creates', () => {
-	expect(testCoin.chain[0].data).toEqual("Genesis Block");
+  expect(testCoin.chain.length).toEqual(2);
 });
 
-test('get last block', () => {
-	expect(testCoin.chain[0].data).toEqual("Genesis Block");
-});
+test('get latest block', () => {
+  let getLatest = testCoin.getLatestBlock();
 
-test('gets last block', () => {
-	let lastBLock = testCoin.getLatestBlock();
-	expect(lastBLock.data).toEqual({amount: 5000});
+  expect(getLatest).toHaveProperty('previousHash');
+  expect(getLatest).toHaveProperty('hash');
 });
 
 test('valid chain', () => {
-	expect(testCoin.isChainValid()).toEqual(true);
-	testCoin.chain[2].data = {amount:10000000};
-	expect(testCoin.isChainValid()).toEqual(false);
+  expect(testCoin.isChainValid()).toEqual(true);
+
+  const lastBlock = testCoin.getLatestBlock();
+
+  // Change transaction
+  const correctAmount = lastBlock.transactions[0].amount;
+  lastBlock.transactions[0].amount = 1;
+  expect(testCoin.isChainValid()).toEqual(false);
+
+  // Reset transaction to correct amount
+  lastBlock.transactions[0].amount = correctAmount;
+  expect(testCoin.isChainValid()).toEqual(true);
+
+  // Break the hash of the previous block
+  const correctHash = lastBlock.previousHash;
+  lastBlock.previousHash = 'wrong';
+  expect(testCoin.isChainValid()).toEqual(false);
+
+  // Reset
+  lastBlock.previousHash = correctHash;
+  expect(testCoin.isChainValid()).toEqual(true);
 });
 
-test('valid chain 2', () => {
-	testCoin.chain[2].previousHash = 'thiswillfail';
-	expect(testCoin.isChainValid()).toEqual(false);
+test('test transaction amount added and correct', () => {
+  let testTransactionAmount = testCoin.chain[1].transactions[0].amount;
+  expect(testTransactionAmount).toEqual(200);
 });
 
+test('can get transaction by address', () => {
+  transactions = testCoin.getTransactionByAddress('address1').then(transactions => {
+    expect(transactions).toHaveProperty('sent');
+    expect(transactions).toHaveProperty('received');
+
+    // Check sent the 200 test
+    expect(transactions.sent[0].amount).toEqual(200);
+  });
+});
+
+test('can address balance', () => {
+  transactions = testCoin.getBalanceOfAddress('address1').then(balance => {
+    // Check sent the 200 test
+    expect(balance).toEqual(300);
+  });
+});

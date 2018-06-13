@@ -9,23 +9,19 @@ class Block {
 
   calculateHash() {
     const SHA256 = require('crypto-js/sha256');
-    return SHA256(this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
+    return SHA256(this.previousHash + this.timestamp + JSON.stringify(this.transactions) + this.nonce).toString();
   }
 
   async mineBlock(difficulty) {
-    console.log('Mining.......', difficulty);
+    // console.log('Mining.......', difficulty, this.hash.substring(0, difficulty));
 
-    while (this.hash.substring(0, difficulty) !== new Array(difficulty + 1).join('0')) {
+    while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join('0')) {
       this.nonce++;
-      this.hash = this.calculateHash();
-      console.log('Block mined: ' + this.hash);
-      return this.hash;
+      let hashToUse = this.calculateHash();
+      this.hash = hashToUse;
     }
 
-    // while(this.hash.substring(0, difficulty) !== new Array(difficulty + 1).join("0")) {
-    // 	this.nonce++;
-    // 	this.hash = this.calculateHash();
-    // }
+    return this;
   }
 }
 

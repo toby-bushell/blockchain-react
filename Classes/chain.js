@@ -4,7 +4,7 @@ const Transaction = require('./transaction');
 class Chain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
-    this.difficulty = 1;
+    this.difficulty = 5;
 
     // Place to store transactions in between block creation
     this.pendingTransactions = [];
@@ -28,20 +28,16 @@ class Chain {
     // Push into onto the "pendingTransactions" array
     this.pendingTransactions.push(newTransaction);
 
-    console.log('\x1b[32m', 'transaction being pushed to block', newTransaction, '\x1b[0m');
-
     return 'transaction created', newTransaction;
   }
 
   async minePendingTransactions(miningRewardAddress) {
     // Create new block with all pending transactions and mine it..
-    let block = new Block(Date.now(), this.pendingTransactions);
+    let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
     let newBlock = await block.mineBlock(this.difficulty);
 
     // Add the newly mined block to the chain
-    this.chain.push(block);
-
-    console.log('\x1b[32m', 'this chain', this.chain, 'new block to push', newBlock, '\x1b[0m');
+    this.chain.push(newBlock);
 
     // Reset the pending transactions and send the mining reward
     this.pendingTransactions = [new Transaction(null, miningRewardAddress, this.miningReward)];
@@ -52,14 +48,8 @@ class Chain {
   async getTransactionByAddress(address) {
     let transactions = { sent: [], received: [] };
 
-    console.log('\x1b[32m', 'this chain ', this.chain, '\x1b[0m');
-
     for (const block of this.chain) {
-      console.log('\x1b[31m', 'block', block, '\x1b[0m');
-
       for (const trans of block.transactions) {
-        console.log('\x1b[31m', 'transaction ', trans, '\x1b[0m');
-
         if (trans.fromAddress === address) {
           transactions.sent.push(trans);
         }
@@ -84,7 +74,6 @@ class Chain {
         // If the given address is the sender -> reduce the balance
         if (trans.fromAddress === address) {
           balance -= trans.amount;
-          console.log('adress: ', address, 'was a sender of amount: ', trans.amount, 'newBalance: ', balance);
         }
 
         // If the given address is the receiver -> increase the balance
@@ -101,6 +90,7 @@ class Chain {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
+
       if (currentBlock.previousHash !== previousBlock.hash) {
         return false;
       }

@@ -14,7 +14,8 @@
   },
   "jest": {
     "collectCoverage": true,
-    "coverageDirectory": "test/coverage"
+    "coverageDirectory": "test/coverage",
+    "testRegex": "./test/.*test.js$"
   },
   "scripts": {
     "start": "node main.js",

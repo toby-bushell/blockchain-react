@@ -4,17 +4,6 @@ const isRequired = () => {
   throw new Error('param is required');
 };
 
-// export const StartMining = async (address = isRequired()) => {
-//   console.log('ui firing start mining');
-//   let response = await axios.get('/api/mine');
-
-//   return response;
-//   try {
-//   } catch (e) {
-//     console.log('error starting mining', e);
-//   }
-// };
-
 export const getTransactions = async (address = isRequired()) => {
   let response = await axios.get('/api/get-transactions', {
     params: {
